@@ -1,18 +1,19 @@
 package com.dz.main;
 
+import com.dz.main.resources.StudentController;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
-public class StudentDropwizardDemoApplication extends Application<StudentDropwizardDemoConfiguration> {
+public class StudentDropWizardDemoApplication extends Application<StudentDropwizardDemoConfiguration> {
 
     public static void main(final String[] args) throws Exception {
-        new StudentDropwizardDemoApplication().run(args);
+        new StudentDropWizardDemoApplication().run(args);
     }
 
     @Override
     public String getName() {
-        return "student-dropwizard-demo";
+        return "student-DropWizard-demo";
     }
 
     @Override
@@ -24,6 +25,8 @@ public class StudentDropwizardDemoApplication extends Application<StudentDropwiz
     public void run(final StudentDropwizardDemoConfiguration configuration,
                     final Environment environment) {
         // TODO: implement application
+        final StudentController resource = new StudentController(configuration.getDefaultName()
+                , configuration.getTemplate());
+       environment.jersey().register(resource);
     }
-
 }

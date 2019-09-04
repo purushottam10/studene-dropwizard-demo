@@ -1,17 +1,13 @@
 package com.dz.main.api;
 
-import io.dropwizard.Configuration;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.validator.constraints.Email;
 
-import javax.validation.constraints.NotNull;
-import java.io.Serializable;
-import java.util.UUID;
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Student extends BaseModel{
 
 
-public class Student extends Configuration implements Serializable {
 
-    @NotNull
-    private String id= UUID.randomUUID().toString();;
     private String firstName;
     private String lastName;
     private String marks;
@@ -19,12 +15,13 @@ public class Student extends Configuration implements Serializable {
     @Email
     private String email;
 
+
     public Student() {
     }
 
-    public Student(@NotNull String id, String firstName, String lastName, String marks, long dob, @Email String email) {
+    public Student(String firstName, String lastName, String marks, long dob, @Email String email) {
 
-        this.id = id;
+
         this.firstName = firstName;
         this.lastName = lastName;
         this.marks = marks;
@@ -32,13 +29,7 @@ public class Student extends Configuration implements Serializable {
         this.email = email;
     }
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getFirstName() {
         return firstName;
